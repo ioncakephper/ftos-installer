@@ -27,7 +27,7 @@ if (options.defaults) {
         }
     }
 }
-console.log(defaults);
+
 
 let message;
 
