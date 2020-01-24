@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/ioncakephper/ftos-installer#readme",
   "dependencies": {
+    "commander": "^4.1.0",
     "fs": "0.0.1-security",
     "handlebars": "^4.7.2",
     "path": "^0.12.7",

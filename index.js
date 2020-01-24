@@ -3,6 +3,15 @@ const fs = require("fs");
 const path = require("path")
 const Handlebars = require("handlebars")
 const util = require("util");
+const program = require("commander");
+
+program
+    .option("-d, --default <filename>", "Filename or full path to file with default values")
+    .option("--no-verify", "do not check paths are valid")
+    .parse(process.argv);
+
+let options = program.opts();
+console.log(options);
 
 
 let message;
@@ -10,9 +19,16 @@ let message;
 let kitpath = "C:\\";
 message = util.format("Path of installation kit -- decompressed folder whose name ends with GOLD (default %s): ", kitpath);
 kitPath = prompt(message, kitpath);
+if (options.verify) {
+    if (!fs.existsSync(kitPath)) {
+        console.log("Path %s does not exist.", kitPath);
+        process.exit(1);
+    };
+}
+
 let instanceName = prompt("Instance name: ");
 
-let instancePath = path.join("C:", instanceName);
+let instancePath = path.join("C:\\", instanceName);
 message = util.format("Instance path (default %s): ", instancePath);
 instancePath = prompt(message, instancePath);
 
@@ -36,7 +52,7 @@ data = {
 };
 
 let content = render_template("install.handlebars", data);
-save_install_bat(path.join(instancePath, "install.bat"), content);
+save_install_bat(path.join(".", "install.bat"), content);
 
 function render_template(basename, data) {
     let source = fs.readFileSync(path.join(__dirname, basename), "utf8");
@@ -46,7 +62,7 @@ function render_template(basename, data) {
 function save_install_bat(filename, content) {
     console.log(content);
     console.log(filename);
-    // fs.writeFileSync(filename, content, "utf8");
+    fs.writeFileSync(filename, content, "utf8");
 }
 
 
