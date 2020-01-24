@@ -15,5 +15,12 @@
   "bugs": {
     "url": "https://github.com/ioncakephper/ftos-installer/issues"
   },
-  "homepage": "https://github.com/ioncakephper/ftos-installer#readme"
+  "homepage": "https://github.com/ioncakephper/ftos-installer#readme",
+  "dependencies": {
+    "fs": "0.0.1-security",
+    "handlebars": "^4.7.2",
+    "path": "^0.12.7",
+    "prompt": "^1.0.0",
+    "prompt-sync": "^4.2.0"
+  }
 }
