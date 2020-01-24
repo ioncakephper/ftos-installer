@@ -1,0 +1,19 @@
+{
+  "name": "ftos-installer",
+  "version": "1.0.0",
+  "description": "FTOS Installation preparation CLI app, walks you through creating an install.bat file. When you run it, it will install the FintechOS framework -- provided the resources are available.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ioncakephper/ftos-installer.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ioncakephper/ftos-installer/issues"
+  },
+  "homepage": "https://github.com/ioncakephper/ftos-installer#readme"
+}
