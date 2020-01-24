@@ -7,10 +7,13 @@ const Handlebars = require("handlebars")
 const util = require("util");
 const program = require("commander");
 
+
 program
     .option("-d, --default <filename>", "Filename or full path to file with default values")
     .option("--no-verify", "do not check paths are valid")
-    .parse(process.argv);
+    ;
+
+program.parse(process.argv);
 
 let options = program.opts();
 
