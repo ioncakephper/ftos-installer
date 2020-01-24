@@ -1,0 +1,6 @@
+{
+    "defaults": {
+        "rootInstallationTarget": "C:\\FintechOsInstances",
+        "kitPath": "C:\\Downloads\\FintechOsInstallKits"
+    }
+}

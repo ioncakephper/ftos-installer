@@ -9,19 +9,31 @@ const program = require("commander");
 
 
 program
-    .option("-d, --default <filename>", "Filename or full path to file with default values")
+    .option("-d, --defaults [filename]", "Filename or full path to file with default values", "ftos-defaults.json")
     .option("--no-verify", "do not check paths are valid")
     ;
 
 program.parse(process.argv);
 
+let defaults = {}
 let options = program.opts();
+if (options.defaults) {
+    if (!fs.existsSync(options.defaults)) {
+        let jsonSource = fs.readFileSync(options.defaults, "utf8");
+        let dfltObj = JSON.parse(jsonSource);
+        let definedDefaults = dfltObj.defaults;
+        for (const d in definedDefaults) {
+            defaults[d] = definedDefaults[d];
+        }
+    }
+}
+console.log(defaults);
 
 let message;
 
-let kitpath = "C:\\";
-message = util.format("Path of installation kit -- decompressed folder whose name ends with GOLD (default %s): ", kitpath);
-kitPath = prompt(message, kitpath);
+let kitPath = (defaults.kitPath) ? defaults.kitPath : "C:\\";
+message = util.format("Path of installation kit -- decompressed folder whose name ends with GOLD (default %s): ", kitPath);
+kitPath = prompt(message, kitPath);
 if (options.verify) {
     if (!fs.existsSync(kitPath)) {
         console.log("Path %s does not exist.", kitPath);
@@ -31,7 +43,8 @@ if (options.verify) {
 
 let instanceName = prompt("Instance name: ");
 
-let instancePath = path.join("C:\\", instanceName);
+let rootInstallationTarget = (defaults.rootInstallationTarget) ? defaults.rootInstallationTarget : "C:\\";
+let instancePath = path.join(rootInstallationTarget, instanceName);
 message = util.format("Instance path (default %s): ", instancePath);
 instancePath = prompt(message, instancePath);
 
