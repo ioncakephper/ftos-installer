@@ -11,8 +11,6 @@ program
     .parse(process.argv);
 
 let options = program.opts();
-console.log(options);
-
 
 let message;
 
@@ -45,6 +43,8 @@ message = util.format("Instance database name (default %s): ", dbName);
 dbName = prompt(message, instanceName);
 
 data = {
+    instanceName: instanceName,
+    instancePath: instancePath,
     studioPath: studioPath,
     portalPath: portalPath,
     dbName: dbName,
@@ -55,14 +55,18 @@ let content = render_template("install.handlebars", data);
 save_install_bat(path.join(".", "install.bat"), content);
 
 function render_template(basename, data) {
+    data.dateTime = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');
     let source = fs.readFileSync(path.join(__dirname, basename), "utf8");
     let template = Handlebars.compile(source);
     return template(data);
 }
 function save_install_bat(filename, content) {
     console.log(content);
-    console.log(filename);
-    fs.writeFileSync(filename, content, "utf8");
+    a = "Y";
+    a = prompt("Is this correct (Y/N) (default Y)? ", a);
+    if (a.match(/ *[yY].*/)) {
+        fs.writeFileSync(filename, content, "utf8");
+    }
 }
 
 
