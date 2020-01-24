@@ -1,8 +1,27 @@
 REM 
-REM ============= FintechOS Installation ==================
+REM ================ FintechOS Installation ===================
 REM
+REM NOTE: To run this file, you MUST have Administrative rights
+REM
+REM                       S U M M A R Y
+REM
+REM             Install kit path: {{kitPath}}
+REM                Instance Name: {{instanceName}}
+REM         Instance Studio path: {{studioPath}}
+REM         Instance Portal path: {{portalPath}}
+REM
+REM       .bat file generated on: {{dateTime}}
+REM
+REM ===========================================================
+REM
+
+MKDIR {{instancePath}}
+CD {{instancePath}}
+MKDIR EBS_DIR
+MKDIR {{studioPath}}
+MKDIR {{portalPath}}
+
 CD {{kitPath}}\SQL
 BasicDbUpgrade -i -d {{dbName}}
 BasicDbUpgrade -w -d {{dbName}}
 BasicDbUpgrade -g -d {{dbName}}
-
