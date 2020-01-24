@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 var prompt = require("prompt-sync")({});
 const fs = require("fs");
 const path = require("path")
