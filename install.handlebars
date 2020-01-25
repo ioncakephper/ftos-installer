@@ -11,17 +11,36 @@ REM         Instance Studio path: {{studioPath}}
 REM         Instance Portal path: {{portalPath}}
 REM
 REM       .bat file generated on: {{dateTime}}
+REM Initialize instance database: {{database}}
+REM      Install instance Studio: {{studio}}
+REM      Install instance Portal: {{portal}}
 REM
 REM ===========================================================
 REM
 
+IF NOT EXIST "{{instancePath}}" GOTO MKINSTANCE
+RMDIR /S /Q {{instancePath}}
+:MKINSTANCE
 MKDIR {{instancePath}}
-CD {{instancePath}}
-MKDIR EBS_DIR
+{{#if studio}}
 MKDIR {{studioPath}}
+{{/if}}
+{{#if portal}}
 MKDIR {{portalPath}}
+MKDIR {{instancePath}}\EBS_DIR
+{{/if}}
 
+{{#if database}}
 CD {{kitPath}}\SQL
 BasicDbUpgrade -i -d {{dbName}}
 BasicDbUpgrade -w -d {{dbName}}
 BasicDbUpgrade -g -d {{dbName}}
+{{/if}}
+
+{{#if studio}}
+REM powershell commands go here
+{{/if}}
+
+{{#if portal}}
+REM powershell commands go here
+{{/if}}

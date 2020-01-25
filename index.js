@@ -11,12 +11,17 @@ const program = require("commander");
 program
     .option("-d, --defaults [filename]", "Filename or full path to file with default values", "ftos-defaults.json")
     .option("--no-verify", "do not check paths are valid")
+    .option("--no-database", "skip installing instance database")
+    .option("--no-studio", "skip installing instance Studio")
+    .option("--no-portal", "skip installing instance Portal")
+    .option("-o, --output <fullfilenamepath>", "full path to generated install file, or filename", "install.bat")
     ;
 
 program.parse(process.argv);
 
 let defaults = {}
 let options = program.opts();
+
 if (options.defaults) {
     if (!fs.existsSync(options.defaults)) {
         let jsonSource = fs.readFileSync(options.defaults, "utf8");
@@ -27,7 +32,6 @@ if (options.defaults) {
         }
     }
 }
-
 
 let message;
 
@@ -61,6 +65,9 @@ message = util.format("Instance database name (default %s): ", dbName);
 dbName = prompt(message, instanceName);
 
 data = {
+    database: options.database,
+    studio: options.studio,
+    portal: options.portal,
     instanceName: instanceName,
     instancePath: instancePath,
     studioPath: studioPath,
@@ -70,7 +77,9 @@ data = {
 };
 
 let content = render_template("install.handlebars", data);
-save_install_bat(path.join(".", "install.bat"), content);
+
+let installFilename = options.output;
+save_install_bat(installFilename, content);
 
 function render_template(basename, data) {
     data.dateTime = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');
