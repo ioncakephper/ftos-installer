@@ -97,6 +97,7 @@ function render_template(filename, data) {
     let template = Handlebars.compile(source);
     return template(data);
 }
+
 function save_install_bat(filename, content) {
     console.log(content);
     a = "Y";

@@ -14,15 +14,15 @@ CLI app to assist the installation process of FintechOS framework
 
 ## Installation
 
-Install the package globally.
+Install the package globally. The global install provides the `ftosin` CLI command, which is the only way to use this package.
 
 ```bash
-$ npm install ftos-installer -g
+npm install ftos-installer -g
 ```
 
 ## Usage
 
-```
+```txt
 Usage: ftos-installer [options]
 
 Generate install.bat for FintechOS Framework. Provide your values or accept suggested values.
@@ -54,16 +54,15 @@ Following the installation information questions, you will review the generated 
 At the command prompt, type:
 
 ```bash
-$ mkdir C:\Users\default\Documents\FintechOS-Installations
-$ cd C:\Users\default\Documents\FintechOS-Installations
-$ ftosin --no-verify --output ./v20-install/install-SheldonG20.bat
+mkdir C:\Users\default\Documents\FintechOS-Installations
+cd C:\Users\default\Documents\FintechOS-Installations
+ftosin --no-verify --output ./v20-install/install-SheldonG20.bat
 ```
-
 
 ## Default template
 
 ```txt
-REM 
+REM
 REM ================ FintechOS Installation ===================
 REM
 REM NOTE: To run this file, you MUST have Administrative rights
@@ -127,4 +126,3 @@ Name | Type | Description | Default
  `portalPath` | B3 | v1 | NA
  `studio` | boolean | v1 | true
  `studioPath` | B3 | v1 | NA
-
