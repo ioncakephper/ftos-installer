@@ -107,7 +107,7 @@ pause
 
 {{#if portal}}
 REM powershell commands go here
-powershell.exe -File "{{kitPath}}\PortalWebApp\PortalWebAppInstaller.ps1" -p_MainCommand Install -p_InstallDir "{{portalPath}}" -p_IisWebSite "Default Web Site" -p_IisApp {{instanceName}}Portal -p_IisAppPool {{instanceName}}Portal -p_DbConnServer "training0001" -p_DbConnSqlAuthUser ftos -p_DbConnSqlAuthPass ftos -p_DbConnDb {{dbName}} -p_UploadEBSDir {{instancePath}}\EBS_DIR 
+powershell.exe -File "{{kitPath}}\PortalWebApp\PortalWebAppInstaller.ps1" -p_MainCommand Install -p_InstallDir "{{portalPath}}" -p_IisWebSite "Default Web Site" -p_IisApp {{instanceName}}Portal -p_IisAppPool {{instanceName}}Portal -p_DbConnServer "training0001" -p_DbConnSqlAuthUser ftos -p_DbConnSqlAuthPass ftos -p_DbConnDb {{dbName}} -p_UploadEBSDir {{instancePath}}\EBS_DIR
 pause
 {{/if}}
 ```
