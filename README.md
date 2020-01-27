@@ -22,6 +22,12 @@ npm install ftos-installer -g
 
 ## Usage
 
+Check `ftosin` is available as a command:
+
+```bash
+ftosin -h
+```
+
 ```txt
 Usage: ftos-installer [options]
 
