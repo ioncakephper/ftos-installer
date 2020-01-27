@@ -13,9 +13,12 @@ $ npm install ftos-installer -g
 ## Usage
 
 ```
-Usage: ftosin [options]
+Usage: ftos-installer [options]
+
+Generate install.bat for FintechOS Framework. Provide your values or accept suggested values.
 
 Options:
+  -V, --version                    output the version number
   -d, --defaults [filename]        Filename or full path to file with default values (default: "ftos-defaults.json")
   --no-verify                      do not check paths are valid
   --no-database                    skip installing instance database
@@ -44,5 +47,3 @@ $ mkdir C:\Users\default\Documents\FintechOS-Installations
 $ cd C:\Users\default\Documents\FintechOS-Installations
 $ ftosin --no-verify --output ./v20-install/install-SheldonG20.bat
 ```
-
-
