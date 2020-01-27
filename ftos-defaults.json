@@ -1,6 +1,20 @@
 {
     "defaults": {
-        "rootInstallationTarget": "C:\\FintechOsInstances",
-        "kitPath": "C:\\Downloads\\FintechOsInstallKits"
+        // Starting path where instances will be stored.
+        // "rootInstallationTarget": "C:\\FintechOsInstances",
+
+        // Path of installation kit. It the path to folder ending in -GOLD after
+        // decompressing the distribution kit.
+        // "kitPath": "C:\Users\default\Downloads\FTOS-CORE-RLS-v20.1.0\FTOS-CORE-RLS-v20.1.0\FTOS-CORE-RLS-v20.1.0.0-b197-GOLD",
+
+        // "dbName": "Demo",
+
+        // 
+        // Typically, you will not want to save default values
+        // for the items below, but it is possible.
+        //
+        // "portalPath": "",
+        // "studioPath": "",
+        // "instancePath": ""
     }
 }

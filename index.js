@@ -13,12 +13,13 @@ let version = package.version;
 program
     .version(version)
     .description("Generate install.bat for FintechOS Framework. Provide your values or accept suggested values.")
-    .option("-d, --defaults [filename]", "Filename or full path to file with default values", "ftos-defaults.json")
+    .option("-d, --defaults [file]", "Filename or full path to file with default values", "ftos-defaults.json")
     .option("--no-verify", "do not check paths are valid")
     .option("--no-database", "skip installing instance database")
     .option("--no-studio", "skip installing instance Studio")
     .option("--no-portal", "skip installing instance Portal")
-    .option("-o, --output <fullfilenamepath>", "full path to generated install file, or filename", "install.bat")
+    .option("-t, --template <file>", "install .bat template file with .handlebars extension", path.join(__dirname, './install.handlebars'))
+    .option("-o, --output <file>", "full path to generated install file, or filename", "install.bat")
     ;
 
 program.parse(process.argv);
@@ -50,6 +51,10 @@ if (options.verify) {
 }
 
 let instanceName = prompt("Instance name: ");
+if (!instanceName.match(/[ a-zA-Z0-9\-_]+/g)) {
+    console.log("Instance name is invalid %s", instanceName);
+    process.exit(1);
+}
 
 let rootInstallationTarget = (defaults.rootInstallationTarget) ? defaults.rootInstallationTarget : "C:\\";
 let instancePath = path.join(rootInstallationTarget, instanceName);
@@ -80,14 +85,15 @@ data = {
     kitPath: kitPath
 };
 
-let content = render_template("install.handlebars", data);
+let templateFilename = options.template;
+let content = render_template(path.resolve(templateFilename), data);
 
 let installFilename = options.output;
 save_install_bat(installFilename, content);
 
-function render_template(basename, data) {
+function render_template(filename, data) {
     data.dateTime = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');
-    let source = fs.readFileSync(path.join(__dirname, basename), "utf8");
+    let source = fs.readFileSync(filename, "utf8");
     let template = Handlebars.compile(source);
     return template(data);
 }
