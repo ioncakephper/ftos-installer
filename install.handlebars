@@ -23,24 +23,26 @@ RMDIR /S /Q {{instancePath}}
 :MKINSTANCE
 MKDIR {{instancePath}}
 {{#if studio}}
-MKDIR {{studioPath}}
+MKDIR {{instancePath}}\EBS_DIR
 {{/if}}
 {{#if portal}}
-MKDIR {{portalPath}}
 MKDIR {{instancePath}}\EBS_DIR
 {{/if}}
 
 {{#if database}}
-CD {{kitPath}}\SQL
-BasicDbUpgrade -i -d {{dbName}}
-BasicDbUpgrade -w -d {{dbName}}
-BasicDbUpgrade -g -d {{dbName}}
+CD "{{kitPath}}\SQL"
+start BasicDbUpgrader.exe -i -s training0001 -d {{dbName}} && BasicDbUpgrader.exe -w -s training0001 -d {{dbName}} && BasicDbUpgrader.exe -g -s training0001 -d {{dbName}}
+pause
 {{/if}}
 
 {{#if studio}}
 REM powershell commands go here
+powershell.exe -File "{{kitPath}}\DesignerWebApp\DesignerWebAppInstaller.ps1" -p_MainCommand Install -p_InstallDir "{{studioPath}}" -p_IisWebSite "default web site" -p_IisApp {{instanceName}}Studio -p_IisAppPool {{instanceName}}Studio -p_DbConnServer "training0001" -p_DbConnSqlAuthUser ftos -p_DbConnSqlAuthPass ftos -p_DbConnDb {{dbName}} {{instancePath}}\EBS_DIR
+pause
 {{/if}}
 
 {{#if portal}}
 REM powershell commands go here
+powershell.exe -File "{{kitPath}}\PortalWebApp\PortalWebAppInstaller.ps1" -p_MainCommand Install -p_InstallDir "{{portalPath}}" -p_IisWebSite "Default Web Site" -p_IisApp {{instanceName}}Portal -p_IisAppPool {{instanceName}}Portal -p_DbConnServer "training0001" -p_DbConnSqlAuthUser ftos -p_DbConnSqlAuthPass ftos -p_DbConnDb {{dbName}} -p_UploadEBSDir {{instancePath}}\EBS_DIR 
+pause
 {{/if}}
