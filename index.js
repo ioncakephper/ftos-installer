@@ -7,8 +7,12 @@ const Handlebars = require("handlebars")
 const util = require("util");
 const program = require("commander");
 
+let package = JSON.parse(fs.readFileSync(path.join(__dirname, "./package.json"), "utf8"));
+let version = package.version;
 
 program
+    .version(version)
+    .description("Generate install.bat for FintechOS Framework. Provide your values or accept suggested values.")
     .option("-d, --defaults [filename]", "Filename or full path to file with default values", "ftos-defaults.json")
     .option("--no-verify", "do not check paths are valid")
     .option("--no-database", "skip installing instance database")
