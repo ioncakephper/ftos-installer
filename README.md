@@ -1,6 +1,8 @@
 <!-- omit in toc -->
 # ftos-installer
 
+![badge checked thoroughly](https://img.shields.io/badge/checked-thoroughly-green)
+
 CLI app to assist the installation process of FintechOS framework
 
 - [Installation](#installation)
