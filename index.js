@@ -73,7 +73,17 @@ let dbName = instanceName;
 message = util.format("Instance database name (default %s): ", dbName);
 dbName = prompt(message, instanceName);
 
+let iisWebSite = (defaults.iisWebSite) ? defaults.iisWebSite : "Default Web Site";
+message = util.format("IIS Website to host Studio and/or Portal as application (default '%s'): ", iisWebSite);
+iisWebSite = prompt(message, iisWebSite);
+
+let connectionName = (defaults.serverName) ? defaults.connectionName : "training0001";
+message = util.format("Connection name (default \"%s\"): ", connectionName);
+connectionName = prompt(message, connectionName);
+
 data = {
+    connectionName: connectionName,
+    iisWebSite: iisWebSite,
     database: options.database,
     studio: options.studio,
     portal: options.portal,

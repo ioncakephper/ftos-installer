@@ -1,7 +1,7 @@
 <!-- omit in toc -->
 # ftos-installer
 
-![badge checked thoroughly](https://img.shields.io/badge/checked-thoroughly-green)
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/ioncakephper/ftos-installer) ![GitHub repo size](https://img.shields.io/github/repo-size/ioncakephper/ftos-installer) ![npm](https://img.shields.io/npm/dt/ftos-installer)
 
 CLI app to assist the installation process of FintechOS framework
 
@@ -68,7 +68,7 @@ ftosin --no-verify --output ./v20-install/install-SheldonG20.bat
 ## Default template
 
 ```txt
-REM
+REM 
 REM ================ FintechOS Installation ===================
 REM
 REM NOTE: To run this file, you MUST have Administrative rights
@@ -84,6 +84,8 @@ REM       .bat file generated on: {{dateTime}}
 REM Initialize instance database: {{database}}
 REM      Install instance Studio: {{studio}}
 REM      Install instance Portal: {{portal}}
+REM           IIS Parent Website: {{iisWebSite}}
+REM              Connection name: {{connectionName}}
 REM
 REM ===========================================================
 REM
@@ -101,19 +103,17 @@ MKDIR {{instancePath}}\EBS_DIR
 
 {{#if database}}
 CD "{{kitPath}}\SQL"
-start BasicDbUpgrader.exe -i -s training0001 -d {{dbName}} && BasicDbUpgrader.exe -w -s training0001 -d {{dbName}} && BasicDbUpgrader.exe -g -s training0001 -d {{dbName}}
+start BasicDbUpgrader.exe -i -s {{connectionName}} -d {{dbName}} && BasicDbUpgrader.exe -w -s {{connectionName}} -d {{dbName}} && BasicDbUpgrader.exe -g -s {{connectionName}} -d {{dbName}}
 pause
 {{/if}}
 
 {{#if studio}}
-REM powershell commands go here
-powershell.exe -File "{{kitPath}}\DesignerWebApp\DesignerWebAppInstaller.ps1" -p_MainCommand Install -p_InstallDir "{{studioPath}}" -p_IisWebSite "default web site" -p_IisApp {{instanceName}}Studio -p_IisAppPool {{instanceName}}Studio -p_DbConnServer "training0001" -p_DbConnSqlAuthUser ftos -p_DbConnSqlAuthPass ftos -p_DbConnDb {{dbName}} {{instancePath}}\EBS_DIR
+powershell.exe -File "{{kitPath}}\DesignerWebApp\DesignerWebAppInstaller.ps1" -p_MainCommand Install -p_InstallDir "{{studioPath}}" -p_IisWebSite "{{iisWebSite}}" -p_IisApp {{instanceName}}Studio -p_IisAppPool {{instanceName}}Studio -p_DbConnServer "{{connectionName}}" -p_DbConnSqlAuthUser ftos -p_DbConnSqlAuthPass ftos -p_DbConnDb {{dbName}} {{instancePath}}\EBS_DIR
 pause
 {{/if}}
 
 {{#if portal}}
-REM powershell commands go here
-powershell.exe -File "{{kitPath}}\PortalWebApp\PortalWebAppInstaller.ps1" -p_MainCommand Install -p_InstallDir "{{portalPath}}" -p_IisWebSite "Default Web Site" -p_IisApp {{instanceName}}Portal -p_IisAppPool {{instanceName}}Portal -p_DbConnServer "training0001" -p_DbConnSqlAuthUser ftos -p_DbConnSqlAuthPass ftos -p_DbConnDb {{dbName}} -p_UploadEBSDir {{instancePath}}\EBS_DIR
+powershell.exe -File "{{kitPath}}\PortalWebApp\PortalWebAppInstaller.ps1" -p_MainCommand Install -p_InstallDir "{{portalPath}}" -p_IisWebSite "Default Web Site" -p_IisApp {{instanceName}}Portal -p_IisAppPool {{instanceName}}Portal -p_DbConnServer "{{connectionName}}" -p_DbConnSqlAuthUser ftos -p_DbConnSqlAuthPass ftos -p_DbConnDb {{dbName}} -p_UploadEBSDir {{instancePath}}\EBS_DIR 
 pause
 {{/if}}
 ```
@@ -122,9 +122,11 @@ pause
 
 Name | Type | Description | Default
 ---------|---------|---------|-------
+`connectionName` | string | v2 | "Default Web Site"
 `database` | boolean | Switch indicates to create `.bat` section to initialize and upgrade database | true
 `dateTime` | DateTime | v1 | application-provided value as `yyyy-mm-dd hh:mm:ss`
 `dbName` | B1 | v1 | NA
+`iisWebSite` | B1 | v1 | NA
  `instanceName` | B1 | v1 | NA
  `instancePath` | B2 | v1 | NA
  `kitPath` | B2 | v1 | NA
