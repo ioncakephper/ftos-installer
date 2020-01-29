@@ -1,0 +1,20 @@
+{
+    "defaults": {
+        "rootInstallationTarget": "C:\\",
+        "dbSqlAuthUser": "host",
+        "dbSqlAuthPass": "host",
+        "connectionName": "training0001",
+        "studioIisApp": "PatrickG20Studio",
+        "portalIisApp": "PatrickG20Portal",
+        "iisWebSite": "Default Web Site",
+        "database": true,
+        "studio": true,
+        "portal": true,
+        "instanceName": "PatrickG20",
+        "instancePath": "C:\\PatrickG20",
+        "studioPath": "C:\\PatrickG20\\Studio",
+        "portalPath": "C:\\PatrickG20\\Portal",
+        "dbName": "PatrickG20",
+        "kitPath": "C:\\Downloads"
+    }
+}

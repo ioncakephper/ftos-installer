@@ -1,7 +1,8 @@
 <!-- omit in toc -->
 # ftos-installer
 
-![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/ioncakephper/ftos-installer) ![GitHub repo size](https://img.shields.io/github/repo-size/ioncakephper/ftos-installer) ![npm](https://img.shields.io/npm/dt/ftos-installer)
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/ioncakephper/ftos-installer) ![GitHub repo size](https://img.shields.io/github/repo-size/ioncakephper/ftos-installer) ![npm](https://img.shields.io/npm/dt/ftos-installer)  [![GitHub](https://img.shields.io/github/license/ioncakephper/ftos-installer)](https://github.com/ioncakephper/ftos-installer/blob/master/LICENSE)
+
 
 CLI app to assist the installation process of FintechOS framework
 

@@ -18,6 +18,7 @@ program
     .option("--no-database", "skip installing instance database")
     .option("--no-studio", "skip installing instance Studio")
     .option("--no-portal", "skip installing instance Portal")
+    .option("-s, --save [file]", "save answers to default answers file", "ftos-defaults.json")
     .option("-t, --template <file>", "install .bat template file with .handlebars extension", path.join(__dirname, './install.handlebars'))
     .option("-o, --output <file>", "full path to generated install file, or filename", "install.bat")
     ;
@@ -28,7 +29,7 @@ let defaults = {}
 let options = program.opts();
 
 if (options.defaults) {
-    if (!fs.existsSync(options.defaults)) {
+    if (fs.existsSync(options.defaults)) {
         let jsonSource = fs.readFileSync(options.defaults, "utf8");
         let dfltObj = JSON.parse(jsonSource);
         let definedDefaults = dfltObj.defaults;
@@ -50,7 +51,9 @@ if (options.verify) {
     };
 }
 
-let instanceName = prompt("Instance name: ");
+let instanceName = (defaults.instanceName) ? defaults.instanceName : "Demo";
+message = util.format("Instance name (default %s): ", instanceName);
+instanceName = prompt(message, instanceName);
 if (!instanceName.match(/[ a-zA-Z0-9\-_]+/g)) {
     console.log("Instance name is invalid %s", instanceName);
     process.exit(1);
@@ -81,8 +84,28 @@ let connectionName = (defaults.serverName) ? defaults.connectionName : "training
 message = util.format("Connection name (default \"%s\"): ", connectionName);
 connectionName = prompt(message, connectionName);
 
+let studioIisApp = util.format("%s%s", instanceName, "Studio")
+message = util.format("Studio as IIS Application Name (default %s): ", studioIisApp);
+studioIisApp = prompt(message, studioIisApp);
+
+let portalIisApp = util.format("%s%s", instanceName, "Portal")
+message = util.format("Portal as IIS Application Name (default %s): ", portalIisApp);
+portalIisApp = prompt(message, portalIisApp);
+
+let dbSqlAuthUser = (defaults.dbSqlAuthUser) ? defaults.dbSqlAuthUser : "host";
+message = util.format("SQL Database Authorized Username (default %s): ", dbSqlAuthUser);
+dbSqlAuthUser = prompt(message, dbSqlAuthUser);
+
+let dbSqlAuthPass = (defaults.dbSqlAuthPass) ? defaults.dbSqlAuthPass : "host";
+message = util.format("SQL Database Authorized Password (default %s): ", dbSqlAuthPass);
+dbSqlAuthPass = prompt(message, dbSqlAuthPass);
+
 data = {
+    dbSqlAuthUser: dbSqlAuthUser,
+    dbSqlAuthPass: dbSqlAuthPass,
     connectionName: connectionName,
+    studioIisApp: studioIisApp,
+    portalIisApp: portalIisApp,
     iisWebSite: iisWebSite,
     database: options.database,
     studio: options.studio,
@@ -114,6 +137,36 @@ function save_install_bat(filename, content) {
     a = prompt("Is this correct (Y/N) (default Y)? ", a);
     if (a.match(/ *[yY].*/)) {
         fs.writeFileSync(filename, content, "utf8");
+
+        if (options.save) {
+            let newUnsortedDefaults = {
+                "defaults": {
+                    rootInstallationTarget: rootInstallationTarget,
+                    dbSqlAuthUser: dbSqlAuthUser,
+                    dbSqlAuthPass: dbSqlAuthPass,
+                    connectionName: connectionName,
+                    iisWebSite: iisWebSite,
+                    database: options.database,
+                    studio: options.studio,
+                    portal: options.portal,
+                    instanceName: instanceName,
+                    instancePath: instancePath,
+                    studioPath: studioPath,
+                    portalPath: portalPath,
+                    dbName: dbName,
+                    kitPath: kitPath
+                }
+            }
+
+            let newDefaults = {
+                "defaults": {}
+            }
+            Object.keys(newUnsortedDefaults.defaults).sort().forEach(k => {
+                newDefaults.defaults[k] = newUnsortedDefaults.defaults[k];
+            })
+
+            fs.writeFileSync(options.save, JSON.stringify(newDefaults, null, 4), "utf8");
+        }
     }
 }
 
