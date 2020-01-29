@@ -1,6 +1,6 @@
 {
   "name": "ftos-installer",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "description": "FTOS Installation preparation CLI app, walks you through creating an install.bat file. When you run it, it will install the FintechOS framework -- provided the resources are available.",
   "main": "index.js",
   "bin": {

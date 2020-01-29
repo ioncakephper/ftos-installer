@@ -562,18 +562,17 @@ pause
 
 Name | Type | Description | Default
 ---------|---------|---------|-------
-`connectionName` | string | v2 | "Default Web Site"
+`connectionName` | string | Connection name | "training0001"
 `database` | boolean | Switch indicates to create `.bat` section to initialize and upgrade database | true
-`dbName` | string | v2 | specified value
-`dbSqlAuthPass` | string | v2 | specified value
-`dbSqlAuthUser` | string | v2 | specified value
-`dateTime` | DateTime | v1 | application-provided value as `yyyy-mm-dd hh:mm:ss`
-`dbName` | B1 | v1 | NA
-`iisWebSite` | B1 | v1 | NA
- `instanceName` | B1 | v1 | NA
- `instancePath` | B2 | v1 | NA
- `kitPath` | B2 | v1 | NA
- `portal` | boolean | v1 | true
- `portalPath` | B3 | v1 | NA
- `studio` | boolean | v1 | true
- `studioPath` | B3 | v1 | NA
+`dbName` | string | Name of database to use | `options.dbName`
+`dbSqlAuthPass` | string | Password of username for Microsoft SQL Server Manager | `host`
+`dbSqlAuthUser` | string | Username for Microsoft SQL Server Manager | `host`
+`dateTime` | DateTime | Date and time of `install.bat` generation | application-provided value as `yyyy-mm-dd hh:mm:ss`
+`iisWebSite` | string | Name of website on IIS. Studio and Portal apps will be hosted here. | "Default Web Site"
+ `instanceName` | string | Name of FintechOS installation -- used as base for several values | `options.instanceName`
+ `instancePath` | string | Instance applications root folder | C:\{{instanceName}}
+ `kitPath` | string | Path to installation kit - folder ending in -GOLD | options.kitPath
+ `portal` | boolean | Switch to indicate portal application commands will be generated  | true
+ `portalPath` | string | Path where portal application will be stored | `options.portalPath`
+ `studio` | boolean | Switch to indicate studio application commands will be generated | true
+ `studioPath` | string | Path where studio application will be stored | `options.studioPath`
