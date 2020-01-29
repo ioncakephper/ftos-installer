@@ -13,6 +13,7 @@
         "portalPath": "C:\\AlexG20\\Portal",
         "rootInstallationTarget": "C:\\",
         "studio": true,
-        "studioPath": "C:\\AlexG20\\Studio"
+        "studioPath": "C:\\AlexG20\\Studio",
+        "template": "C:\\Users\\ion.gireada\\Documents\\VSCode Projects\\ftos-installer\\install.handlebars"
     }
 }
