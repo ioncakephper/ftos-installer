@@ -46,15 +46,17 @@ Usage: ftosin [options]
 Generate install.bat for FintechOS Framework. Provide your values or accept suggested values.
 
 Options:
-  -V, --version                    output the version number
-  -d, --defaults [filename]        Filename or full path to file with default values (default: "ftos-defaults.json")
-  --no-verify                      do not check paths are valid
-  --no-database                    skip installing instance database
-  --no-studio                      skip installing instance Studio
-  --no-portal                      skip installing instance Portal
-  -t, --template <file>            install bat template file with .handlebars extension (default: "C:\\Users\\ion.gireada\\Documents\\VSCodeProjects\\ftos-installer\\install.handlebars")
-  -o, --output <fullfilenamepath>  full path to generated install file, or filename (default: "install.bat")
-  -h, --help                       output usage information
+  -V, --version          output the version number
+  -d, --defaults [file]  Filename or full path to file with default values (default: "ftos-defaults.json")
+  --no-pause             skip creating pause command in install.bat
+  --no-verify            do not check paths are valid
+  --no-database          skip installing instance database
+  --no-studio            skip installing instance Studio
+  --no-portal            skip installing instance Portal
+  -s, --save [file]      save answers to default answers file (default: "ftos-defaults.json")
+  -t, --template <file>  install .bat template file with .handlebars extension (default: "C:\\Users\\ion.gireada\\Documents\\VSCodeProjects\\ftos-installer\\install.handlebars")
+  -o, --output <file>    full path to generated install file, or filename (default: "install.bat")
+  -h, --help             output usage information
 ```
 
 Creating `install.bat`
@@ -499,7 +501,6 @@ RMDIR /S /Q C:\AlexG20
 :MKINSTANCE
 MKDIR C:\AlexG20
 ```
-
 
 ## Default template
 

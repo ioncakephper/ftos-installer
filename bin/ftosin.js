@@ -14,6 +14,7 @@ program
     .version(version)
     .description("Generate install.bat for FintechOS Framework. Provide your values or accept suggested values.")
     .option("-d, --defaults [file]", "Filename or full path to file with default values", "ftos-defaults.json")
+    .option("--no-pause", "skip creating pause command in install.bat")
     .option("--no-verify", "do not check paths are valid")
     .option("--no-database", "skip installing instance database")
     .option("--no-studio", "skip installing instance Studio")
@@ -101,6 +102,7 @@ message = util.format("SQL Database Authorized Password (default %s): ", dbSqlAu
 dbSqlAuthPass = prompt(message, dbSqlAuthPass);
 
 data = {
+    pause: pause,
     dbSqlAuthUser: dbSqlAuthUser,
     dbSqlAuthPass: dbSqlAuthPass,
     connectionName: connectionName,
@@ -141,6 +143,7 @@ function save_install_bat(filename, content) {
         if (options.save) {
             let newUnsortedDefaults = {
                 "defaults": {
+                    pause: pause,
                     rootInstallationTarget: rootInstallationTarget,
                     dbSqlAuthUser: dbSqlAuthUser,
                     dbSqlAuthPass: dbSqlAuthPass,
