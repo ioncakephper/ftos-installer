@@ -1,0 +1,19 @@
+{
+    "defaults": {
+        "connectionName": "training0001",
+        "database": true,
+        "dbName": "Loanorg",
+        "dbSqlAuthPass": "host",
+        "dbSqlAuthUser": "host",
+        "iisWebSite": "Default Web Site",
+        "instanceName": "Loanorg",
+        "instancePath": "C:\\Loanorg",
+        "kitPath": "C:\\Downloads\\ftos-GOLD",
+        "portal": true,
+        "portalPath": "C:\\Loanorg\\Portal",
+        "rootInstallationTarget": "C:\\",
+        "studio": true,
+        "studioPath": "C:\\Loanorg\\Studio",
+        "template": "C:\\Users\\ion.gireada\\Documents\\VSCode Projects\\ftos-installer\\install.handlebars"
+    }
+}

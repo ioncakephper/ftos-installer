@@ -38,21 +38,15 @@ MKDIR {{instancePath}}\EBS_DIR
 {{#if database}}
 CD "{{kitPath}}\SQL"
 start BasicDbUpgrader.exe -i -s {{connectionName}} -d {{dbName}} && BasicDbUpgrader.exe -w -s {{connectionName}} -d {{dbName}} && BasicDbUpgrader.exe -g -s {{connectionName}} -d {{dbName}}
-{{#if pause}}
 pause
-{{/if}}
 {{/if}}
 
 {{#if studio}}
 powershell.exe -File "{{kitPath}}\DesignerWebApp\DesignerWebAppInstaller.ps1" -p_MainCommand Install -p_InstallDir "{{studioPath}}" -p_IisWebSite "{{iisWebSite}}" -p_IisApp {{studioIisApp}} -p_IisAppPool {{instanceName}}Studio -p_DbConnServer "{{connectionName}}" -p_DbConnSqlAuthUser {{dbSqlAuthUser}} -p_DbConnSqlAuthPass {{dbSqlAuthPass}} -p_DbConnDb {{dbName}} {{instancePath}}\EBS_DIR
-{{#if pause}}
 pause
-{{/if}}
 {{/if}}
 
 {{#if portal}}
 powershell.exe -File "{{kitPath}}\PortalWebApp\PortalWebAppInstaller.ps1" -p_MainCommand Install -p_InstallDir "{{portalPath}}" -p_IisWebSite "{{iisWebSite}}" -p_IisApp {{portalIisApp}} -p_IisAppPool {{instanceName}}Portal -p_DbConnServer "{{connectionName}}" -p_DbConnSqlAuthUser {{dbSqlAuthUser}} -p_DbConnSqlAuthPass {{dbSqlAuthPass}} -p_DbConnDb {{dbName}} -p_UploadEBSDir {{instancePath}}\EBS_DIR 
-{{#if pause}}
 pause
-{{/if}}
 {{/if}}
